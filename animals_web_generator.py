@@ -1,4 +1,5 @@
 import json
+from data_fetcher import fetch_data
 
 
 def load_data(file_path):
@@ -34,18 +35,24 @@ def serialize_animal(animal):
     return output
 
 
-def generate_output(animals_data):
+def generate_output(animals_data, animal_name):
     """ Generates a string from data"""
-    output = ''
-    for animal in animals_data:
-        output += serialize_animal(animal)
+    if animals_data:
+        output = ''
+        for animal in animals_data:
+            output += serialize_animal(animal)
+    else:
+        output = f"<h2>The animal \"{animal_name}\" doesn't exist.</h2>"
 
     return output
 
 
 def main():
-    animals_data = load_data('animals_data.json')
-    output = generate_output(animals_data)
+    animal_name = input("Enter a name of an animal: ")
+
+    animals_data = fetch_data(animal_name)
+
+    output = generate_output(animals_data, animal_name)
     html = read_html()
     html = html.replace('            __REPLACE_ANIMALS_INFO__', output)
     write_html(html)
