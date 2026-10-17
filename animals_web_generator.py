@@ -42,7 +42,9 @@ def generate_output(animals_data, animal_name):
         for animal in animals_data:
             output += serialize_animal(animal)
     else:
-        output = f"<h2>The animal \"{animal_name}\" doesn't exist.</h2>"
+        text = f"The animal \"{animal_name}\" does not exist."
+        print(text)
+        output = f"<h2>{text}</h2>"
 
     return output
 
@@ -56,6 +58,8 @@ def main():
     html = read_html()
     html = html.replace('            __REPLACE_ANIMALS_INFO__', output)
     write_html(html)
+    if animals_data:
+        print("Website was successfully generated to the file animals.html.")
 
 
 if __name__ == '__main__':

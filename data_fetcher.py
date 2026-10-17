@@ -1,10 +1,14 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-API_KEY = ""
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
+
 HEADERS = {
     "X-Api-Key": API_KEY
 }
-
 
 
 def fetch_data(animal_name):
@@ -30,7 +34,7 @@ def fetch_data(animal_name):
 
 
 def main():
-    print(fetch_data("adsdasd"))
+    print(fetch_data("fox"))
 
 
 if __name__ == '__main__':
